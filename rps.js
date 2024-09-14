@@ -2,52 +2,60 @@ console.log("Let's Play ROCK PAPER SCISSOR");
 
 let randomNumber = Math.random();
 
-const r = "rock";
-const p = "paper";
-const s = "scissor";
-
-let humanAnswer;
-
 let computerChoice = getComputerChoice();
+let humanChoice;
 
 let computerScore = 0;
 let humanScore = 0;
 
+
 function getComputerChoice() {
     if (randomNumber < 0.33) {
-    return r;
+    return 'rock';
     } else if (randomNumber > 0.33 & randomNumber < 0.66) {
-        return p;
+        return 'paper';
     } else {
-        return s;
+        return 'scissor';
     }
 }
 
-getComputerChoice();
-getHumanChoice();
 
 function getHumanChoice() {
-    humanAnswer = prompt("Choose rock, paper or scissor", "type rock, paper or scissor here");
+    humanChoice = prompt("Choose rock, paper or scissor", "type rock, paper or scissor here");
 }
 
-console.log(humanAnswer);
-let humanChoice = humanAnswer;
 
-console.log(computerChoice);
+function playRound() {
+
+    getHumanChoice();
+    console.log(humanChoice);
+
+    getComputerChoice();
+    console.log(computerChoice);
 
 
-function playRound(humanChoice, computerChoice) {
-
-    if ((humanChoice === 'rock' && computerChoice === 'scissor') || (humanChoice === 'paper' && computerChoice === 'rock') || (humanChoice === 'scissor' && computerChoice === 'paper')) {
-        alert('Human WINS');
+    if (computerChoice === humanChoice) {
+        alert('DRAW');
     
-    } else if ((humanChoice === 'rock' && computerChoice === 'paper') || (humanChoice === 'paper' && computerChoice === 'scissor') || (humanChoice === 'scissor' && computerChoice === 'rock')) {
-        alert('Computer WINS');
+    } else if (
+        (humanChoice === 'rock' && computerChoice === 'scissor') || 
+        (humanChoice === 'paper' && computerChoice === 'rock') || 
+        (humanChoice === 'scissor' && computerChoice === 'paper')
+    ) { 
+        alert('Human WINS') & (humanScore = humanScore +1);
+
 
     } else {
-        alert('DRAW');
+        alert('Computer WINS') & (computerScore = computerScore +1);
+        
     }
-
 }
 
-playRound();
+
+function playGame() {
+    for(let i = 0; i < 5; i++) {
+        playRound();
+    }
+}
+
+playGame();
