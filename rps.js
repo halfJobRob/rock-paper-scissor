@@ -3,6 +3,7 @@ console.log("Let's Play ROCK PAPER SCISSOR");
 let randomNumber = Math.random();
 
 let computerChoice = getComputerChoice();
+let humanAnswer;
 let humanChoice;
 
 let computerScore = 0;
@@ -21,7 +22,8 @@ function getComputerChoice() {
 
 
 function getHumanChoice() {
-    humanChoice = prompt("Choose rock, paper or scissor", "type rock, paper or scissor here");
+    humanAnswer = prompt("Choose rock, paper or scissor", "type rock, paper or scissor here");
+    humanChoice = humanAnswer.toLowerCase();
 }
 
 
