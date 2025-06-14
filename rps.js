@@ -88,7 +88,7 @@ function playRound(humanSelection, computerSelection) {
            round++;
          }
 
-
+// !logic complete
 
 // Create a function playGame
 // Move playRound and scores inside playGame
