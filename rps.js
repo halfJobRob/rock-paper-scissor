@@ -1,64 +1,70 @@
-console.log("Let's Play ROCK PAPER SCISSOR");
+ let humanScore = 0;
+ let computerScore = 0;
 
-let randomNumber = Math.random();
+// Complete & Correct
+const getComputerChoice = function () {
+const randomNumber = Math.floor(Math.random() * 3);
+  if (randomNumber === 0) {
+    // Check for 0
+    return "rock";
+  } else if (randomNumber === 1) {
+    return "paper";
+  } else {
+    // randomNumber will be 2 here
+    return "scissor";
+  }
+};
+// end getComputerChoice
 
-let computerChoice = getComputerChoice();
-let humanAnswer;
-let humanChoice;
+// Write function getHumanChoice
+// Use Prompt
+// Test function using console.log or alert
+const getHumanChoice = function () {
+  let inputValue = prompt("pick rock, paper or scissor").toLowerCase();
+    if (inputValue !== "rock" && inputValue !== "paper" && inputValue !== "scissor") {
+    return getHumanChoice();
+  } else {
+    return inputValue;
+  }
+};
+// end getHumanChoice
 
-let computerScore = 0;
-let humanScore = 0;
+let round = 1; //keep track of rounds
 
+function playRound(humanChoice, computerChoice) {
+            if (humanChoice === computerChoice) {
+              alert("Draw");
+            } else if ((humanChoice === "rock" && computerChoice === "scissor") || 
+                   (humanChoice === "paper" && computerChoice === "rock") || 
+                   (humanChoice === "scissor" && computerChoice === "paper")) {
+              humanScore++;
+              alert("You Win " + humanChoice + " beats " + computerChoice);
+            } else {
+              computerScore++;
+              alert("You Lose " + computerChoice + " beats " + humanChoice);
+            }
+            alert(`Round ${round}: Human Score: ${humanScore}, Computer Score: ${computerScore}`); //track scores
+          }
 
-function getComputerChoice() {
-    if (randomNumber < 0.33) {
-    return 'rock';
-    } else if (randomNumber > 0.33 & randomNumber < 0.66) {
-        return 'paper';
+// Create a function playGame
+// Move playRound and scores inside playGame
+// Play 5 rounds
+const playGame = function() {
+  
+  while (humanScore < 5 && computerScore < 5) {
+    const humanSelection = getHumanChoice(); // Get choice INSIDE the loop
+    const computerSelection = getComputerChoice(); // Get choice INSIDE the loop
+
+        playRound(humanSelection, computerSelection);
+        round++; //increment round count
+}
+  
+  if (humanScore >= 5) {
+        alert("You WIN!!!");
     } else {
-        return 'scissor';
+        alert("You LOSE... LOOSER!!!");
     }
-}
 
-
-function getHumanChoice() {
-    humanAnswer = prompt("Choose rock, paper or scissor", "type rock, paper or scissor here");
-    humanChoice = humanAnswer.toLowerCase();
-}
-
-
-function playRound() {
-
-    getHumanChoice();
-    console.log(humanChoice);
-
-    getComputerChoice();
-    console.log(computerChoice);
-
-
-    if (computerChoice === humanChoice) {
-        alert('DRAW');
-    
-    } else if (
-        (humanChoice === 'rock' && computerChoice === 'scissor') || 
-        (humanChoice === 'paper' && computerChoice === 'rock') || 
-        (humanChoice === 'scissor' && computerChoice === 'paper')
-    ) { 
-        alert('Human WINS') & (humanScore = humanScore +1);
-
-
-    } else {
-        alert('Computer WINS') & (computerScore = computerScore +1);
-        
-    }
-}
-
-
-function playGame() {
-    for(let i = 0; i < 5; i++) {
-        playRound();
-    }
-    alert('Human: ' + humanScore + ' Computer: ' + computerScore);
-}
+};
 
 playGame();
