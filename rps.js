@@ -1,6 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
-let round = 0; //keep track of rounds
+let round = 1; //keep track of rounds
 
 // ComputerChoice
 const getComputerChoice = function () {
@@ -17,10 +17,29 @@ const randomNumber = Math.floor(Math.random() * 3);
 };
 // end getComputerChoice
 
-
-// HumanChoice
-const buttons = document.querySelectorAll("button");
+// select html for DOM
+const buttonsDiv = document.querySelector(".rps-buttons");
 const choicesDiv = document.querySelector(".choices"); //select or target choices
+
+//create buttons
+const rockButtonElement = document.createElement('button'); // This creates an empty <button> tag in memory.
+const paperButtonElement = document.createElement('button');
+const scissorButtonElement = document.createElement('button');
+
+// set button properties
+rockButtonElement.id = "rock";
+paperButtonElement.id = "paper";
+scissorButtonElement.id = "scissor";
+
+//set text content
+rockButtonElement.textContent="rock";
+paperButtonElement.textContent="paper";
+scissorButtonElement.textContent="scissor";
+
+// append the buttons to buttonsDiv
+buttonsDiv.appendChild(rockButtonElement);
+buttonsDiv.appendChild(paperButtonElement);
+buttonsDiv.appendChild(scissorButtonElement);
 
 //create a new h2 element for human and comp
 const dispHmnChoice = document.createElement("h2");
@@ -33,6 +52,9 @@ dispCpuChoice.textContent = "Computer: ???";
 //append display choices to choices
 choicesDiv.appendChild(dispHmnChoice);
 choicesDiv.appendChild(dispCpuChoice);
+
+// Create buttons array for event listeners
+const buttons = [rockButtonElement, paperButtonElement, scissorButtonElement];
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
@@ -61,15 +83,17 @@ buttons.forEach(button => {
     }
 
   });
-})
+}) 
 
 function endGame() {
     if (humanScore >= 5) {
      // parentNode.removeChild(child);
       alert("You Win!");
+      buttonsDiv.remove();
     } else {
      // parentNode.removeChild(child);
       alert("You Lose!");
+      buttonsDiv.remove();
     }
 }
 
@@ -86,10 +110,4 @@ function playRound(humanSelection, computerSelection) {
            console.log(humanSelection);
            console.log(computerSelection);
            round++;
-         }
-
-// !logic complete
-
-// Create a function playGame
-// Move playRound and scores inside playGame
-// Play 5 rounds
+         } 

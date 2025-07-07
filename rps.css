@@ -1,0 +1,23 @@
+.header {
+  display:flex;
+  justify-content:center;
+}
+
+.scores {
+  display:flex;
+  justify-content:space-around;
+}
+
+.choices {
+  display:flex;
+  justify-content:space-around;
+}
+
+.rps-buttons {
+  display:flex;
+  justify-content:center;
+}
+
+button {
+    margin: 1rem;
+}
